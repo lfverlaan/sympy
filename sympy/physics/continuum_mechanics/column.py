@@ -73,7 +73,7 @@ class Column:
     def __str__(self):
         str_sol = 'Column({}, {}, {})'.format(sstr(self._length), sstr(self._elastic_modulus), sstr(self._area))
         return str_sol
-    
+
     @property
     def length(self):
         """Returns the length of the column."""
@@ -82,12 +82,12 @@ class Column:
     @length.setter
     def length(self, l):
         self._length = sympify(l)
-    
+
     @property
     def elastic_modulus(self):
         """Returns the elastic modulus of the column"""
         return self._elastic_modulus
-    
+
     @elastic_modulus.setter
     def elastic_modulus(self, E):
         self._elastic_modulus = sympify(E)
@@ -173,7 +173,7 @@ class Column:
                 - For ramp loads: kN/m**2
                 - For parabolic ramp loads: kN/m**3
                 - And so on.
-        
+
         loc: Sympifyable
             The starting point of the applied load. For
             point loads this is simply the location.
@@ -185,7 +185,7 @@ class Column:
                 - For ramp loads, order = 1
                 - For parabolic ramp loads, order = 2
                 - ... so on.
-        
+
         Examples
         ========
         There is a column of 10 meters, area A and elastic modulus E. It
