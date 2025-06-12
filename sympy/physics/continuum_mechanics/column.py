@@ -45,7 +45,7 @@ class Column:
         elastic_modulus: Sympifyable
             A Symbol or value representing the column's modulus of
             elasticity. It is a measure of the stiffness of the material.
-        
+
         area: Sympifyable
             A symbol or value representing the column's cross-sectional
             area.
@@ -104,7 +104,7 @@ class Column:
     @property
     def variable(self):
         return self._variable
-    
+
     @variable.setter
     def variable(self, v):
         if isinstance(v, Symbol):
