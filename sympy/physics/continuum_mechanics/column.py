@@ -261,7 +261,7 @@ class Column:
         >>> c.apply_support(L)
         >>> c.apply_load(F, L / 4, -1)
         >>> c.apply_load(F, 3*L / 4, -1)
-        >>> print(c.load)
+        >>> c.load
         F*SingularityFunction(x, L/4, -1) + F*SingularityFunction(x, 3*L/4, -1)
             + R_0*SingularityFunction(x, 0, -1) + R_L*SingularityFunction(x, L, -1)
             + R_L/2*SingularityFunction(x, L/2, -1)
