@@ -240,7 +240,7 @@ class exp(ExpBase, metaclass=ExpMeta):
     See Also
     ========
 
-    log
+    sympy.functions.elementary.exponential.log
     """
 
     def fdiff(self, argindex=1):
@@ -634,7 +634,7 @@ class log(DefinedFunction):
     See Also
     ========
 
-    exp
+    sympy.functions.elementary.exponential.exp
 
     """
 
@@ -691,9 +691,7 @@ class log(DefinedFunction):
                 return S.ComplexInfinity
             elif arg is S.One:
                 return S.Zero
-            elif arg is S.Infinity:
-                return S.Infinity
-            elif arg is S.NegativeInfinity:
+            elif arg is S.Infinity or arg is S.NegativeInfinity:
                 return S.Infinity
             elif arg is S.NaN:
                 return S.NaN
@@ -739,9 +737,7 @@ class log(DefinedFunction):
             coeff = arg.as_coefficient(I)
 
             if coeff is not None:
-                if coeff is S.Infinity:
-                    return S.Infinity
-                elif coeff is S.NegativeInfinity:
+                if coeff is S.Infinity or coeff is S.NegativeInfinity:
                     return S.Infinity
                 elif coeff.is_Rational:
                     if coeff.is_nonnegative:

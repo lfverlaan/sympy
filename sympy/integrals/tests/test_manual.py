@@ -12,7 +12,7 @@ from sympy.functions.elementary.piecewise import Piecewise, piecewise_fold
 from sympy.functions.elementary.trigonometric import (acos, acot, acsc, asec, asin, atan, cos, cot, csc, sec, sin, tan)
 from sympy.functions.special.delta_functions import Heaviside, DiracDelta
 from sympy.functions.special.elliptic_integrals import (elliptic_e, elliptic_f)
-from sympy.functions.special.error_functions import (Chi, Ci, Ei, Shi, Si, erf, erfi, fresnelc, fresnels, li)
+from sympy.functions.special.error_functions import (Chi, Ci, Ei, Shi, Si, erf, erfc, erfi, fresnelc, fresnels, li)
 from sympy.functions.special.gamma_functions import uppergamma
 from sympy.functions.special.polynomials import (assoc_laguerre, chebyshevt, chebyshevu, gegenbauer, hermite, jacobi, laguerre, legendre)
 from sympy.functions.special.zeta_functions import polylog
@@ -291,6 +291,34 @@ def test_manualintegrate_special():
     f, F = 5/sqrt(3 - 2*sin(x)**2), 5*sqrt(3)*elliptic_f(x, Rational(2, 3))/3
     assert_is_integral_of(f, F)
     f, F = sqrt(4 + 9*sin(x)**2), 2*elliptic_e(x, Rational(-9, 4))
+    assert_is_integral_of(f, F)
+    f, F = exp(-x**2)*exp(x), Rational(1,2)*exp(Rational(1,4))*sqrt(pi)*erf(x - Rational(1,2))
+    assert_is_integral_of(f, F)
+    f, F = erf(3*x)*exp(2*x), exp(2*x)*erf(3*x)/2 - exp(Rational(1,9))*erf(3*x - Rational(1,3))/2
+    assert_is_integral_of(f, F)
+    f, F = erfc(4*x)*exp(5*x), exp(5*x)*erfc(4*x)/5 + exp(Rational(25,64))*erf(4*x - Rational(5,8))/5
+    assert_is_integral_of(f, F)
+    f, F = erfi(7*x)*exp(6*x), exp(6*x)*erfi(7*x)/6 - exp(-Rational(9,49))*erfi(7*x + Rational(3,7))/6
+    assert_is_integral_of(f, F)
+    f = sin(2*x)*exp(-3*x**2)
+    F = -I*(sqrt(3)*sqrt(pi)*exp(-Rational(1,3))*erf(sqrt(3)*(6*x - 2*I)/6)/6 -
+        sqrt(3)*sqrt(pi)*exp(-Rational(1,3))*erf(sqrt(3)*(6*x + 2*I)/6)/6)/2
+    assert_is_integral_of(f, F)
+    f = cos(2*x)*exp(-3*x**2)
+    F = (sqrt(3)*sqrt(pi)*exp(-Rational(1,3))*erf(sqrt(3)*(6*x - 2*I)/6)/12 +
+        sqrt(3)*sqrt(pi)*exp(-Rational(1,3))*erf(sqrt(3)*(6*x + 2*I)/6)/12)
+    assert_is_integral_of(f, F)
+    f = sin(x)*erf(x)
+    F = (erf(x - I/2) + erf(x + I/2))*exp(-Rational(1,4))/2 - cos(x)*erf(x)
+    assert_is_integral_of(f, F)
+    f = cos(x)*erf(x)
+    F = I*(erf(x - I/2) - erf(x + I/2))*exp(-Rational(1,4))/2 + sin(x)*erf(x)
+    assert_is_integral_of(f, F)
+    f = sinh(-x)*erf(x)
+    F = (erf(x - Rational(1,2)) + erf(x + Rational(1,2)))*exp(Rational(1,4))/2 - cosh(x)*erf(x)
+    assert_is_integral_of(f, F)
+    f = -cosh(x/2)*erf(x)
+    F = (erf(x - Rational(1,4)) - erf(x + Rational(1,4)))*exp(Rational(1,16)) - 2*sinh(x/2)*erf(x)
     assert_is_integral_of(f, F)
 
 
